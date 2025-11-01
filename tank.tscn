@@ -1,5 +1,104 @@
-[gd_scene format=3 uid="uid://dhxekbd77cact"]
+[gd_scene load_steps=4 format=3 uid="uid://dhxekbd77cact"]
+
+[ext_resource type="Script" uid="uid://dmxvleae4laix" path="res://tank.gd" id="1_6lwfj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_how3p"]
+size = Vector3(2.2416382, 1.9558392, 2.149109)
+
+[sub_resource type="TorusMesh" id="TorusMesh_1ealj"]
+inner_radius = 0.156
+outer_radius = 0.498
 
 [node name="VehicleBody3D" type="VehicleBody3D"]
+engine_force = 63.34
+script = ExtResource("1_6lwfj")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48120117, 0.60555303, 0)
+size = Vector3(1.9624023, 0.9199219, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(0.61979276, 0.78476554, 0, -0.78476554, 0.61979276, 0, 0, 0, 1, -0.8360319, 0.3324536, 0)
+operation = 2
+size = Vector3(0.42773438, 1, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(0.99996114, 0, -0.008813798, 0, 1, 0, 0.008813798, 0, 0.99996114, 0.2606827, 0.6641034, -0.014556885)
+size = Vector3(1.0244598, 0.20263672, 0.7305298)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20882857, -0.01959467, -0.00024414063)
+operation = 2
+size = Vector3(0.66186523, 0.24612427, 0.25341797)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGBox3D/CSGBox3D2"]
+transform = Transform3D(0.99888086, -0.047299642, 5.7723373e-06, 0.04729961, 0.9988807, 0.00031897373, -2.0852312e-05, -0.00031834331, 1.0000002, 0, 0, 0)
+radius = 0.18
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGBox3D/CSGBox3D2/CSGSphere3D"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.52490234, 0, 0)
+radius = 0.15
+height = 0.9501953
+sides = 30
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGBox3D/CSGBox3D2/CSGSphere3D/CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.059814453, 0)
+operation = 2
+radius = 0.12
+height = 0.95
+sides = 30
+
+[node name="CSGCombiner3D" type="RigidBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5138855, 0.46351337, 0.022918701)
+shape = SubResource("BoxShape3D_how3p")
+
+[node name="frontWheel" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, -0.8271165)
+engine_force = 63.34
+use_as_traction = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="frontWheel"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("TorusMesh_1ealj")
+
+[node name="frontWheel2" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0.8648517)
+engine_force = 63.34
+use_as_traction = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="frontWheel2"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("TorusMesh_1ealj")
+
+[node name="backWheel" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.0866332, 0, -0.8271165)
+engine_force = 63.34
+use_as_traction = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="backWheel"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("TorusMesh_1ealj")
+
+[node name="backWheel2" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.0866332, 0, 0.8502035)
+use_as_steering = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="backWheel2"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.013937235, 0, 0)
+mesh = SubResource("TorusMesh_1ealj")
+
+[node name="cameraOrigin" type="Node3D" parent="."]
+transform = Transform3D(0.99884224, -0.047295, -0.008808028, 0.04729961, 0.9988807, 0.00031897373, 0.008783083, -0.0007352205, 0.99996144, 0.7418839, 1.2696564, -0.014556885)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="cameraOrigin"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+spring_length = 2.0
+
+[node name="Camera3D" type="Camera3D" parent="cameraOrigin"]
+transform = Transform3D(0.051915128, 0.047299612, 0.99753064, -0.0021394165, 0.99888074, -0.04725225, -0.99864894, 0.0003189727, 0.0519582, 3.4980385, 0.05269456, -0.016128564)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5138855, 0.46351337, 0.022918701)
+shape = SubResource("BoxShape3D_how3p")
