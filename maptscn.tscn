@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfwahom4ayxtj"]
+[gd_scene load_steps=9 format=3 uid="uid://bfwahom4ayxtj"]
 
 [ext_resource type="PackedScene" uid="uid://dhxekbd77cact" path="res://tank.tscn" id="1_som74"]
+[ext_resource type="PackedScene" uid="uid://c6x647axlc2ec" path="res://mesh.tscn" id="2_m2qbs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_m2qbs"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -45,3 +46,6 @@ shape = SubResource("ConvexPolygonShape3D_qe3wk")
 
 [node name="VehicleBody3D" parent="." instance=ExtResource("1_som74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0204414, 0)
+
+[node name="Node3D" parent="." instance=ExtResource("2_m2qbs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 1)
